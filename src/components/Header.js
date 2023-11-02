@@ -1,9 +1,23 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 const Header = () => {
+
+  const [isScrolled, setIsScrolled] = useState(false);
+  
+  const handleScroll = (e) => {
+    if (window.scrollY > 100) {
+      setIsScrolled(true)
+    } else {
+      setIsScrolled(false)
+    }
+  };
+
+  window.addEventListener("scroll", handleScroll);
+  
+
   return (
-    <header className='py-4 bg-yellow'>
+    <header className= {`py-4 ${isScrolled ? `bg-white` : `bg-yellow`}`}>
       <div className='container'>
         <div className='row align-items-center'>
           <div className='site-log col-md-3'>
