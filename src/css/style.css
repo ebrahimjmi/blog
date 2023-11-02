@@ -1,0 +1,28 @@
+ul {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+a {
+  text-decoration: none;
+  color: rgba(0,0,0,0.8);
+}
+header {
+  border-bottom: 1px solid #000;
+}
+.bg-yellow {
+  background-color: #FFC017;
+}
+.banner-heading {
+  font-size: 90px;
+}
+.banner {
+  padding-bottom: 5rem;
+}
+.banner p {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+img {
+  max-width: 100%;
+}
