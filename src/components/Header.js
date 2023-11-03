@@ -29,7 +29,7 @@ const Header = () => {
                 <Link className='mx-2' to="#">Our Story</Link>
                 <Link className='mx-2' to="#">Membership</Link>
                 <Link className='mx-2' to="#">Write</Link>
-                <Link className='mx-2' to="#">Sign In</Link>
+                <Link className='mx-2' to="/login">Login In</Link>
               </li>
             </ul>
           </nav>

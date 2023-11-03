@@ -34,3 +34,7 @@ header {
 img {
   max-width: 100%;
 }
+.btn {
+  border-radius: 20px;
+ font-size: small;
+}
