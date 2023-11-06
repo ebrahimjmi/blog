@@ -5,21 +5,12 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import "bootstrap/dist/js/bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import HomePage from './pages/HomePage';
 import "./css/style.css";
-import Login from './components/Login';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Routes path="/" element={<App />}>
-        <Route index element={<HomePage />} />
-        <Route path='/login' element={<Login />} />
-      </Routes>
-    </BrowserRouter>
-
+    <App />
   </React.StrictMode>
 );
 

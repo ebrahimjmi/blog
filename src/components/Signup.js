@@ -1,15 +1,14 @@
-import React, { useEffect, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom';
 
-const Login = () => {
+const Signup = () => {
 
-  const navigate = useNavigate();
   const [formData, setFormData] = useState({
+    name: '',
     username: '',
     password: ''
   })
-  const [users, setUsers] = useState(JSON.parse(window.localStorage.getItem('users')));
-  // const [isAuthenticated, setUserAuthenticated] = useState(false);
+  const [users, setUsers] = useState([]);
   const handleInputChange = (e) => {
     const {name, value} = e.target;
     setFormData({...formData, [name]: value})
@@ -17,17 +16,14 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    let isAuthenticated = false;
-    users.map((data) => {
-      if(data.username === formData.username && data.password === formData.password) {
-        isAuthenticated = true;
-      }
-    })
-    if(isAuthenticated) {
-      navigate('/');
-    } else {
-      alert('wrong username or password');
+    const newUser = {
+      id: users.length,
+      ...formData,
     }
+    const tempData = [...users];
+    setUsers([...users, newUser]);
+    tempData.push(newUser);
+    window.localStorage.setItem('users', JSON.stringify(tempData));
   }
   return (
     <div className="container">
@@ -35,8 +31,12 @@ const Login = () => {
         <div className="col-md-6">
           <div className="card mt-5">
             <div className="card-body">
-              <h3 className="card-title text-center">Login</h3>
+              <h3 className="card-title text-center">Sign Up</h3>
               <form onSubmit={handleSubmit}>
+              <div className="mb-3">
+                  <label htmlFor="username" className="form-label">Name</label>
+                  <input type="text" className="form-control" name="name" placeholder="Enter your name" onChange={handleInputChange} value={formData.name}/>
+                </div>
                 <div className="mb-3">
                   <label htmlFor="username" className="form-label">Username</label>
                   <input type="text" className="form-control" name="username" placeholder="Enter your username" onChange={handleInputChange} value={formData.username}/>
@@ -45,8 +45,8 @@ const Login = () => {
                   <label htmlFor="password" className="form-label">Password</label>
                   <input type="password" className="form-control" name="password" placeholder="Enter your password" onChange={handleInputChange} value={formData.password} />
                 </div>
-                <button type="submit" className="btn btn-dark mx-2">Login</button>
-                <Link to = '/signup' className='btn btn-dark'>Create an account</Link>
+                <button type="submit" className="btn btn-dark mx-2">Signup</button>
+                <Link to='/login' className='btn btn-dark'>have an coount?</Link>
               </form>
             </div>
           </div>
@@ -56,4 +56,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default Signup
