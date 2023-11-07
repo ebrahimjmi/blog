@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify';
 
-const Login = () => {
+const Login = ({handleAuthenticated}) => {
 
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -24,9 +25,10 @@ const Login = () => {
       }
     })
     if(isAuthenticated) {
+      handleAuthenticated();
       navigate('/');
     } else {
-      alert('wrong username or password');
+      toast.error('wrong username or password')
     }
   }
   return (

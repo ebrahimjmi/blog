@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
-const Header = () => {
+const Header = ({isAuthenticated}) => {
 
   const [isScrolled, setIsScrolled] = useState(false);
   
@@ -28,8 +28,11 @@ const Header = () => {
               <li>
                 <Link className='mx-2' to="#">Our Story</Link>
                 <Link className='mx-2' to="#">Membership</Link>
-                <Link className='mx-2' to="#">Write</Link>
-                <Link className='mx-2' to="/login">Login In</Link>
+               
+                {
+                  isAuthenticated? (<> <Link className='mx-2' to="/post">Write</Link><p className='d-inline-block text-dark mb-0'>user profile</p></>) : <Link className='mx-2' to="/login">Login In</Link>
+                }
+                
               </li>
             </ul>
           </nav>

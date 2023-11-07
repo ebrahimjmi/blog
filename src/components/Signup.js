@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+
 
 const Signup = () => {
 
@@ -10,10 +12,10 @@ const Signup = () => {
   })
   const [users, setUsers] = useState([]);
   const handleInputChange = (e) => {
-    const {name, value} = e.target;
-    setFormData({...formData, [name]: value})
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value })
   }
-
+  const notify = (message) => toast(message);
   const handleSubmit = (e) => {
     e.preventDefault();
     const newUser = {
@@ -24,6 +26,12 @@ const Signup = () => {
     setUsers([...users, newUser]);
     tempData.push(newUser);
     window.localStorage.setItem('users', JSON.stringify(tempData));
+    notify('Register successful')
+    setFormData({
+      name: '',
+      username: '',
+      password: ''
+    })
   }
   return (
     <div className="container">
@@ -33,13 +41,13 @@ const Signup = () => {
             <div className="card-body">
               <h3 className="card-title text-center">Sign Up</h3>
               <form onSubmit={handleSubmit}>
-              <div className="mb-3">
+                <div className="mb-3">
                   <label htmlFor="username" className="form-label">Name</label>
-                  <input type="text" className="form-control" name="name" placeholder="Enter your name" onChange={handleInputChange} value={formData.name}/>
+                  <input type="text" className="form-control" name="name" placeholder="Enter your name" onChange={handleInputChange} value={formData.name} />
                 </div>
                 <div className="mb-3">
                   <label htmlFor="username" className="form-label">Username</label>
-                  <input type="text" className="form-control" name="username" placeholder="Enter your username" onChange={handleInputChange} value={formData.username}/>
+                  <input type="text" className="form-control" name="username" placeholder="Enter your username" onChange={handleInputChange} value={formData.username} />
                 </div>
                 <div className="mb-3">
                   <label htmlFor="password" className="form-label">Password</label>
