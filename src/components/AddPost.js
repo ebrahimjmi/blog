@@ -1,32 +1,56 @@
 import JoditEditor from 'jodit-react';
 import React, { useState, useRef, useMemo } from 'react';
+import categories from './categoryData';
 const AddPost = () => {
 
   const editor = useRef(null);
-  const [content, setContent] = useState('');
+  const [formData, setFormData] = useState({
+    title: '',
+    post: '',
+    category: 'Programming',
+    blog_img: ''
+  });
+  const [posts, setPosts] = useState([]);
+
   const handleChange = (e) => {
-    const pValue = e;
-    console.log('Value from <p>:', pValue.text);
+    const { name, value } = e.target;
+    console.log(name);
+    setFormData({ ...formData, [name]: value });
+  }
+
+  const handlePost = (e) => {
+    e.preventDefault();
+    console.log(formData);
+    const tempPost = [...posts];
+    setPosts([...posts, formData]);
+    window.localStorage.setItem('posts', JSON.stringify(tempPost));
   }
   return (
-    <div class="container mt-5">
-      <div class="row">
-        <div class="">
-          <div class="card">
-            <div class="card-body">
-              <h2 class="card-title">Create a Post</h2>
+    <div className="container mt-5">
+      <div className="row">
+        <div className="">
+          <div className="card">
+            <div className="card-body">
+              <h2 className="card-title">Create a Post</h2>
               <form>
-                <div class="mb-3">
-                  <label for="title" class="form-label">Post title</label>
-                  <input type="text" class="form-control" id="title" name="title" placeholder="Enter title" />
+                <div className="mb-3">
+                  <label htmlFor="title" className="form-label">Post title</label>
+                  <input type="text" className="form-control" name="title" placeholder="Enter title" onChange={handleChange} />
                 </div>
-                <JoditEditor className='mb-4' ref={editor} value={content} onChange={handleChange} />
-                <div class="mb-3">
-                  <label for="title" class="form-label">Post Category</label>
-                  <input type="text" class="form-control" id="title" name="title" placeholder="Enter Category" />
+                <div className="mb-3">
+                  <textarea type="text" className="form-control" name="post" placeholder="Typing here" rows='5' onChange={handleChange} />
                 </div>
-                <button type="submit" class="btn btn-primary mx-2">Create Post</button>
-                <button type="submit" class="btn btn-danger">Reset Content</button>
+                <div className='mb-3'>
+                  <input type='file' className='form-control-file' name='blog_img' onChange={handleChange} />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="title" className="form-label">Post Category</label>
+                  <select className='form-select' name='category' defaultValue={'Programming'} onChange={handleChange}>
+                    {categories.map((data) => <option key={data.id}>{data.name}</option>)}
+                  </select>
+                </div>
+                <button type="submit" className="btn btn-primary mx-2" onClick={handlePost}>Create Post</button>
+                <button type="submit" className="btn btn-danger">Reset Content</button>
               </form>
             </div>
           </div>

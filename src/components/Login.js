@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify';
 
-const Login = ({handleAuthenticated}) => {
+const Login = ({ handleAuthenticated }) => {
 
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -12,19 +12,25 @@ const Login = ({handleAuthenticated}) => {
   const [users, setUsers] = useState(JSON.parse(window.localStorage.getItem('users')));
   // const [isAuthenticated, setUserAuthenticated] = useState(false);
   const handleInputChange = (e) => {
-    const {name, value} = e.target;
-    setFormData({...formData, [name]: value})
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value })
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
     let isAuthenticated = false;
-    users.map((data) => {
-      if(data.username === formData.username && data.password === formData.password) {
-        isAuthenticated = true;
-      }
-    })
-    if(isAuthenticated) {
+    console.log(users);
+    
+    if(users) {
+      users.map((data) => {
+        // {data.username === formData.username && data.password === formData.password ? isAuthenticated = true : false}
+        if (data.username === formData.username && data.password === formData.password) {
+          isAuthenticated = true;
+        }
+      })
+    }
+
+    if (isAuthenticated) {
       handleAuthenticated();
       navigate('/');
     } else {
@@ -41,14 +47,14 @@ const Login = ({handleAuthenticated}) => {
               <form onSubmit={handleSubmit}>
                 <div className="mb-3">
                   <label htmlFor="username" className="form-label">Username</label>
-                  <input type="text" className="form-control" name="username" placeholder="Enter your username" onChange={handleInputChange} value={formData.username}/>
+                  <input type="text" className="form-control" name="username" placeholder="Enter your username" onChange={handleInputChange} value={formData.username} />
                 </div>
                 <div className="mb-3">
                   <label htmlFor="password" className="form-label">Password</label>
                   <input type="password" className="form-control" name="password" placeholder="Enter your password" onChange={handleInputChange} value={formData.password} />
                 </div>
                 <button type="submit" className="btn btn-dark mx-2">Login</button>
-                <Link to = '/signup' className='btn btn-dark'>Create an account</Link>
+                <Link to='/signup' className='btn btn-dark'>Create an account</Link>
               </form>
             </div>
           </div>
