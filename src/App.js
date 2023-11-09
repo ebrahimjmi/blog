@@ -13,14 +13,21 @@ function App() {
   const handleAuthenticated = (e) => {
     setUserAuthenticated(true);
   }
+  const [user, setUser] = useState('');
+
+  const handleUser = (user) => {
+    setUser(user);
+  }
+
+  const users = JSON.parse(window.localStorage.getItem('users'));
   return (
     <>
       <ToastContainer />
       <BrowserRouter>
         <Routes path="/" element={<App />}>
-          <Route path='/' element={<HomePage isAuthenticated = {isAuthenticated} handleAuthenticated = {handleAuthenticated} />} />
-          <Route path='/login' element={<Login handleAuthenticated = {handleAuthenticated} />} />
-          <Route path='/post' element = {<AddPost />} />
+          <Route path='/' element={<HomePage isAuthenticated = {isAuthenticated} handleAuthenticated = {handleAuthenticated} users = {users} user = {user} handleUser = {handleUser} />} />
+          <Route path='/login' element={<Login handleAuthenticated = {handleAuthenticated} user = {user} handleUser = {handleUser}  />} />
+          <Route path='/post' element = {<AddPost user = {user} />} />
           <Route path='/signup' element={<Signup />} />
         </Routes>
       </BrowserRouter>

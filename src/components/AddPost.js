@@ -1,8 +1,7 @@
 import JoditEditor from 'jodit-react';
 import React, { useState, useRef, useMemo } from 'react';
 import categories from './categoryData';
-const AddPost = () => {
-
+const AddPost = ({user}) => {
   const editor = useRef(null);
   const [formData, setFormData] = useState({
     title: '',
@@ -20,9 +19,10 @@ const AddPost = () => {
 
   const handlePost = (e) => {
     e.preventDefault();
-    console.log(formData);
     const tempPost = [...posts];
     setPosts([...posts, formData]);
+    tempPost.push(formData);
+    console.log(tempPost);
     window.localStorage.setItem('posts', JSON.stringify(tempPost));
   }
   return (

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import SearchBar from './SearchBar';
 
-const Header = ({ isAuthenticated }) => {
+const Header = ({ isAuthenticated, users, user }) => {
 
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -13,7 +13,7 @@ const Header = ({ isAuthenticated }) => {
       setIsScrolled(false)
     }
   };
-
+  
   const [isOpenSearch, setOpenSearch] = useState(false);
   const handleOpenSearch = (e) => {
     setOpenSearch(!isOpenSearch);
@@ -36,12 +36,12 @@ const Header = ({ isAuthenticated }) => {
                 <Link className='mx-2' to="#">Membership</Link>
 
                 {
-                  isAuthenticated ? (<> <Link className='mx-2' to="/post">Write</Link><p className='d-inline-block text-dark mb-0'>user profile</p></>) : <Link className='mx-2' to="/login">Login In</Link>
+                  isAuthenticated ? (<> <Link className='mx-2' to="/post">Write</Link><p className='d-inline-block text-dark mb-0'><span><i class="fa fa-regular fa-user"></i><span className='mx-2'>{user.name}</span></span></p></>) : <Link className='mx-2' to="/login">Login In</Link>
                 }
 
               </li>
               <li>
-                <SearchBar handleOpenSearch = {handleOpenSearch} isOpenSearch = {isOpenSearch} />
+                <SearchBar handleOpenSearch={handleOpenSearch} isOpenSearch={isOpenSearch} />
               </li>
             </ul>
           </nav>

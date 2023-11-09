@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify';
 
-const Login = ({ handleAuthenticated }) => {
-
+const Login = ({ handleAuthenticated, handleUser }) => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: '',
     password: ''
   })
+  
   const [users, setUsers] = useState(JSON.parse(window.localStorage.getItem('users')));
   // const [isAuthenticated, setUserAuthenticated] = useState(false);
   const handleInputChange = (e) => {
@@ -23,8 +23,8 @@ const Login = ({ handleAuthenticated }) => {
     
     if(users) {
       users.map((data) => {
-        // {data.username === formData.username && data.password === formData.password ? isAuthenticated = true : false}
         if (data.username === formData.username && data.password === formData.password) {
+          handleUser(data);
           isAuthenticated = true;
         }
       })

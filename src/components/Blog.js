@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
-import blogData from './BlogData';
 import BlogList from './BlogList';
 
-const Blog =  () => {
+const Blog =  ({user}) => {
 
+  const blogData = JSON.parse(localStorage.getItem('posts'));
   const[data, setData] = useState(blogData);
 
   return (
     <>
-      <BlogList blogData = {data} />
+      <BlogList blogData = {data} user = {user} />
     </>
   )
 }

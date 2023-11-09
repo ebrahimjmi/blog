@@ -3,13 +3,13 @@ import Header from '../components/Header'
 import Banner from '../components/Banner'
 import Blog from '../components/Blog'
 
-const HomePage = ({isAuthenticated}) => {
+const HomePage = ({isAuthenticated, users, user, handleUser}) => {
   return (
     <>
-      <Header isAuthenticated = {isAuthenticated} />
+      <Header isAuthenticated = {isAuthenticated} users = {users} user = {user} handleUser = {handleUser} />
       <Banner />
       <main>
-        <Blog />
+        <Blog user = {user} />
       </main>
     </>
   )
