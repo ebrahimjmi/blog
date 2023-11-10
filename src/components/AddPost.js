@@ -22,7 +22,6 @@ const AddPost = ({user}) => {
     const tempPost = [...posts];
     setPosts([...posts, formData]);
     tempPost.push(formData);
-    console.log(tempPost);
     window.localStorage.setItem('posts', JSON.stringify(tempPost));
   }
   return (

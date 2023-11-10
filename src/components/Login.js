@@ -8,7 +8,7 @@ const Login = ({ handleAuthenticated, handleUser }) => {
     username: '',
     password: ''
   })
-  
+
   const [users, setUsers] = useState(JSON.parse(window.localStorage.getItem('users')));
   // const [isAuthenticated, setUserAuthenticated] = useState(false);
   const handleInputChange = (e) => {
@@ -31,7 +31,7 @@ const Login = ({ handleAuthenticated, handleUser }) => {
     }
 
     if (isAuthenticated) {
-      handleAuthenticated();
+      handleAuthenticated(isAuthenticated);
       navigate('/');
     } else {
       toast.error('wrong username or password')

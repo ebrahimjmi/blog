@@ -3,10 +3,12 @@ ul {
   margin: 0;
   list-style-type: none;
 }
+
 a {
   text-decoration: none;
-  color: rgba(0,0,0,0.8);
+  color: rgba(0, 0, 0, 0.8);
 }
+
 header {
   border-bottom: 1px solid #000;
   position: fixed;
@@ -17,24 +19,42 @@ header {
   padding: 10px 0;
   z-index: 9999;
 }
+
 .bg-yellow {
   background-color: #FFC017;
 }
+
 .banner-heading {
   font-size: 90px;
 }
+
 .banner {
   padding-bottom: 5rem;
   padding-top: 5.5rem;
 }
+
 .banner p {
   font-size: 1.5rem;
   line-height: 1;
 }
+
 img {
   max-width: 100%;
 }
+
 .btn {
   border-radius: 20px;
- font-size: small;
+  font-size: small;
+}
+
+.profile {
+  position: absolute;
+  top: 52px;
+  right: 114px;
+  background: #ffffff;
+  border-radius: 4px;
+  padding: 10px;
+  width: 164px;
+  box-shadow: 0px 5px 19px 0 rgba(31, 32, 41, 0.39);
+  z-index: 9;
 }

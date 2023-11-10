@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import SearchBar from './SearchBar';
 
-const Header = ({ isAuthenticated, users, user }) => {
+const Header = ({ isAuthenticated, users, user, handleAuthenticated }) => {
 
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -13,18 +13,24 @@ const Header = ({ isAuthenticated, users, user }) => {
       setIsScrolled(false)
     }
   };
-  
+
   const [isOpenSearch, setOpenSearch] = useState(false);
+  const [isProfile, setIsProfile] = useState(false);
+  const openProfile = () => {
+    setIsProfile(!isProfile);
+  }
   const handleOpenSearch = (e) => {
     setOpenSearch(!isOpenSearch);
   }
-
   window.addEventListener("scroll", handleScroll);
 
-
+  const handleLogout = () => {
+    openProfile()
+    handleAuthenticated(false);
+  }
   return (
     <header className={`py-4 ${isScrolled ? `bg-white` : `bg-yellow`}`}>
-      <div className='container'>
+      <div className='container position-relative'>
         <div className='row align-items-center'>
           <div className='site-log col-md-3'>
             <Link to='/'>My BLog</Link>
@@ -36,7 +42,7 @@ const Header = ({ isAuthenticated, users, user }) => {
                 <Link className='mx-2' to="#">Membership</Link>
 
                 {
-                  isAuthenticated ? (<> <Link className='mx-2' to="/post">Write</Link><p className='d-inline-block text-dark mb-0'><span><i class="fa fa-regular fa-user"></i><span className='mx-2'>{user.name}</span></span></p></>) : <Link className='mx-2' to="/login">Login In</Link>
+                  isAuthenticated ? (<> <Link className='mx-2' to="/post">Write</Link><p className='d-inline-block text-dark mb-0' onClick={openProfile}><span style={{ cursor: 'pointer' }}><i class="fa fa-regular fa-user"></i><span className='mx-2'>{user.name}</span></span></p></>) : <Link className='mx-2' to="/login">Login In</Link>
                 }
 
               </li>
@@ -49,6 +55,16 @@ const Header = ({ isAuthenticated, users, user }) => {
             <button className='btn site-btn bg-dark text-white'>Get Started</button>
           </div>
         </div>
+        <nav className={`profile ${isProfile ? `d-inline-block` : `d-none`}`}>
+          <ul>
+            <li>
+              <Link to='/viewprofile'>My Profile</Link>
+            </li>
+            <li>
+              <Link onClick={handleLogout}>Logout</Link>
+            </li>
+          </ul>
+        </nav>
       </div>
     </header>
   )
