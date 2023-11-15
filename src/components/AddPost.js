@@ -1,15 +1,18 @@
 import JoditEditor from 'jodit-react';
 import React, { useState, useRef, useMemo } from 'react';
 import categories from './categoryData';
+import { useNavigate } from 'react-router-dom';
 const AddPost = ({user}) => {
   const editor = useRef(null);
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     title: '',
     post: '',
     category: 'Programming',
-    blog_img: ''
+    blog_img: '',
+    author: ''
   });
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState(JSON.parse(window.localStorage.getItem('posts')));
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -19,10 +22,13 @@ const AddPost = ({user}) => {
 
   const handlePost = (e) => {
     e.preventDefault();
+    const author = JSON.parse(window.localStorage.getItem('currentUser'));
     const tempPost = [...posts];
+    formData.author = author.name;
     setPosts([...posts, formData]);
     tempPost.push(formData);
     window.localStorage.setItem('posts', JSON.stringify(tempPost));
+    navigate('/');
   }
   return (
     <div className="container mt-5">

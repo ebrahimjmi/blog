@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import TruncatedContent from './TruncatedContent'
 
 const BlogList = ({ blogData, user }) => {
+  console.log(blogData);
 
   // const [img, setImg] = useState([]);
   // useEffect(() => {
